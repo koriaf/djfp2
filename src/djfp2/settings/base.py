@@ -24,6 +24,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djfp2',
+    'djfp2.calendar',
 )
 
 MIDDLEWARE_CLASSES = (

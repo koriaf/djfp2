@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id='calendar'></div>
+    <div id='popup' class='panel'>
+        <span class="glyphicon glyphicon-remove" id='popup_close_button'></span>
+        <input type='hidden' name='event_id' value='' id='id_event_id' />
+        <input type='text' name='event_title' value='' id='id_event_title' /><br/>
+
+        <span id='colors_choicer'>
+            <span class='color_block' style='background-color: #dcf1db; color: black;'></span>
+            <span class='color_block' style='background-color: #ffad46; color: black;'></span>
+            <span class='color_block' style='background-color: #5484ed; color: black;'></span>
+            <span class='color_block' style='background-color: #fbd75b; color: black;'></span>
+            <span class='color_block' style='background-color: #dc2127; color: black;'></span>
+            <span class='color_block' style='background-color: #dbadff; color: black;'></span>
+            <span class='color_block' style='background-color: #6aa4c1; color: black;'></span>
+        </span>
+
+        <button class='btn btn-primary' id='popup_save_button'>Save</button>
+        <button class='btn btn-danger' id='popup_delete_button'>Delete</button>
+    </div>
+{% endblock %}
+
+
+{% block right_content %}{% endblock %}

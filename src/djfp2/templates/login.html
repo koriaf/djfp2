@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block container %}
+    <form class="form-signin" action="/accounts/login/?next={{ request.GET.next|default:'/' }}" method="post" style='max-width: 300px; display: block; margin: auto; margin-top: 100px'>
+        {% csrf_token %}
+        {{ form.errors }}
+        <h2 class="form-signin-heading" style='text-align: center;'>Authentication</h2>
+        <input type="text" name="username" id="id_username" class="input-block-level form-control" placeholder="username" >
+        <input type="password" name="password" id="id_password" class="input-block-level form-control" placeholder="password">
+        <button class="btn btn-large btn-primary" type="submit" style='display: block; width: 100%;'>Login</button>
+    </form>
+
+    <script type="text/javascript">
+    document.getElementById('id_username').focus()
+    </script>
+{% endblock %}

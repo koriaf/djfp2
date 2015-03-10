@@ -3,11 +3,14 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
+from djfp2.calendar.views import HomeView
+
+
 urlpatterns = patterns(
     '',
-    # Examples:
-    # url(r'^$', 'djfp2.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+    url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'login.html'}),
 
     url(r'^admin/', include(admin.site.urls)),
 )
