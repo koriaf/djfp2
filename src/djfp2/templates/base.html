@@ -6,13 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Planner{% endblock %}</title>
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/lib/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/lib/fullcalendar.min.css">
 
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.1.1/fullcalendar.min.css">
         <link rel="stylesheet" href="/static/djfp2.css">
 
         <link rel="icon" type="image/png" href="/static/favicon.png" />
-
         {% block extra_head %}{% endblock %}
     </head>
     <body>
@@ -52,13 +51,20 @@
             </div>
         </div>
 
-        <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.1.1/fullcalendar.min.js"></script>
+        {% comment %}
+            <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.1.1/fullcalendar.min.js"></script>
+        {% endcomment %}
 
-        <script src="/static/djfp2.js"></script>
+        <script src="/static/lib/jquery-2.1.3.min.js"></script>
+        <script src="/static/lib/bootstrap.min.js"></script>
+        <script src="/static/lib/moment.min.js"></script>
+        <script src="/static/lib/fullcalendar.min.js"></script>
 
         {% block extra_js %}{% endblock %}
+
+        <script src="/static/djfp2.js"></script>
     </body>
 </html>

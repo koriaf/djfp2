@@ -11,3 +11,36 @@
 .navbar {
     min-height: 10px !important;
 }
+
+
+#popup {
+    display: none;
+    width: 300px;
+    position: absolute;
+    z-index: 10;
+    background-color: #fefdfe;
+    border: 1px solid silver;
+    padding: 10px;
+}
+
+#popup input {
+    width: 260px;
+    padding: 0px 2px;
+}
+
+#popup button {
+    padding: 2px 5px;
+    margin: 3px 0px;
+}
+
+#popup #colors_choicer {
+    float: right;
+}
+
+#popup #colors_choicer .color_block {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    margin: 4px 2px 0px 0px;
+}
+
