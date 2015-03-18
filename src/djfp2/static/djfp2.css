@@ -44,3 +44,14 @@
     margin: 4px 2px 0px 0px;
 }
 
+hr.timeline {
+    position: absolute;
+    background-color: red;
+    left: 55px;
+    border-size: 1px 0px 0px 0px;
+    border-top: 1px solid red;
+    width: 90%;
+    margin: 0;
+    padding: 0;
+    z-index: 9;
+}

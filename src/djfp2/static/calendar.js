@@ -28,7 +28,7 @@ $(document).ready(function() {
             if(typeof(timelineInterval) != 'undefined'){
               window.clearInterval(timelineInterval); 
             }
-            timelineInterval = window.setInterval(PlannerLib.calendar.setTimeline, 300000);
+            timelineInterval = window.setInterval(PlannerLib.calendar.setTimeline, 30000);
             try {
               PlannerLib.calendar.setTimeline();
             } catch(err) {}
