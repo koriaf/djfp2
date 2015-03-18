@@ -55,3 +55,11 @@ hr.timeline {
     padding: 0;
     z-index: 9;
 }
+
+div.fc-toolbar {
+    margin-bottom: 0px;
+}
+
+.navbar {
+    margin-bottom: 5px;
+}
