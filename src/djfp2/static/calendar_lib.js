@@ -176,7 +176,7 @@ PlannerLib.calendar.setTimeline = function(view) {
     var curSeconds = (( ((curTime.getHours() * 60) + curTime.getMinutes()) - calMinTimeInMinutes) * 60) + curTime.getSeconds();
     var percentOfDay = curSeconds / ((calMaxTimeInMinutes - calMinTimeInMinutes) * 60);
 
-    var topLoc = Math.floor(parentDiv.height() * percentOfDay) - 30;
+    var topLoc = Math.floor(parentDiv.height() * percentOfDay);
     var timeCol = $('.fc-time:visible');
     timeline.css({top: topLoc + "px", left: (timeCol.outerWidth(true))+"px"});
 
