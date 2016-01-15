@@ -1,6 +1,6 @@
 Django Fullcalendar Planner 2
 =============================
 
-My vision of private calendar and task planner platform. There is 2 main components: calendar and todo-list.
+My vision of private calendar. It's private. It works and it fullfill my needs. If you want to take a look how it looks like - visit Fullcalendar project demos.
 
-It's not working now. I will make beta when I will have time to do it.
+If you want your own private calendar - feel free to set up it on your server and use.

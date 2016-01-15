@@ -8,7 +8,7 @@ $(document).ready(function() {
         allDaySlot: false,
         axisFormat: 'HH:mm',
         timeFormat: 'HH:mm',
-        minTime: '06:00:00',
+        minTime: '07:00:00',
         timezone: 'local',
         header: {
             left: 'prev,next today',

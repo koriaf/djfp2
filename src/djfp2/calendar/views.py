@@ -15,8 +15,8 @@ class EventsGetView(LoginRequiredMixin, JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
         events = CalendarEvent.objects.filter(
             owner=request.user,
-            start_date__gte=request.REQUEST.get('start'),
-            end_date__lte=request.REQUEST.get('end'),
+            start_date__gte=request.GET.get('start'),
+            end_date__lte=request.GET.get('end'),
         )
         rows = [event.get_as_fullcalendar_event() for event in events]
         return self.render_json_response(rows)
