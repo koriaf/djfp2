@@ -1,4 +1,4 @@
-# encoding=utf-8
+import dateutil.parser
 from django import forms
 
 from djfp2.calendar.models import CalendarEvent
@@ -12,12 +12,22 @@ class CalendarEventForm(forms.ModelForm):
             'title', 'color', 'textcolor',
         )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, data, *args, **kwargs):
         try:
             self.owner = kwargs.pop('owner')
         except KeyError:
             self.owner = None
-        return super(CalendarEventForm, self).__init__(*args, **kwargs)
+        rasterized_data = {}
+        for field_name in self.Meta.fields:
+            value = data.get(field_name)
+            if value is not None:
+                if isinstance(value, list):
+                    rasterized_data[field_name] = value[0]
+                else:
+                    rasterized_data[field_name] = value
+        rasterized_data['start_date'] = dateutil.parser.parse(rasterized_data['start_date'])
+        rasterized_data['end_date'] = dateutil.parser.parse(rasterized_data['end_date'])
+        return super(CalendarEventForm, self).__init__(rasterized_data, *args, **kwargs)
 
     def save(self, *args, **kwargs):
         kwargs['commit'] = False

@@ -4,3 +4,5 @@ django-braces
 psycopg2
 flake8
 six
+python-dateutil
+pytz

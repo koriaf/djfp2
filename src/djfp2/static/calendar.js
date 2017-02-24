@@ -10,7 +10,7 @@ $(document).ready(function() {
         axisFormat: 'HH:mm',
         timeFormat: 'HH:mm',
         minTime: '08:00:00',
-        timezone: 'local',
+        timezone: 'utc',
         header: {
             left: 'prev,next today',
             center: 'title',

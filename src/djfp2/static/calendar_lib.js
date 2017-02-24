@@ -4,12 +4,13 @@ PlannerLib.calendar.popup = {};
 
 PlannerLib.calendar.eventCreate = function(new_event) {
     moment().local();
+
     $.post(
         "/calendar/events/create/",
         {
             'title': new_event.title,
-            'start_date': new_event.start.local().format('YYYY-MM-DD HH:mm:ss'),
-            'end_date': new_event.end.local().format('YYYY-MM-DD HH:mm:ss'),
+            'start_date': new_event.start.utc().toISOString(),
+            'end_date': new_event.end.utc().toISOString(),
             'event_to_replace': new_event.id,
             'color': new_event.backgroundColor,
             'textcolor': new_event.textColor,
@@ -35,8 +36,8 @@ PlannerLib.calendar.eventSave = function(new_event) {
         "/calendar/events/update/",
         {
             'event_id': new_event.id,
-            'start_date': new_event.start.local().format('YYYY-MM-DD HH:mm:ss'),
-            'end_date': new_event.end.local().format('YYYY-MM-DD HH:mm:ss'),
+            'start_date': new_event.start.utc().toISOString(),
+            'end_date': new_event.end.utc().toISOString(),
             'title': new_event.title,
             'color': new_event.backgroundColor,
             'textcolor': new_event.textColor,

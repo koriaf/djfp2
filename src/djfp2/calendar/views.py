@@ -1,10 +1,16 @@
-# encoding: utf-8
+import dateutil.parser
+import pytz
 from braces.views import LoginRequiredMixin, JSONResponseMixin
 from django.views.generic import TemplateView, View
 from django.shortcuts import get_object_or_404
 
 from djfp2.calendar.forms import CalendarEventForm
 from djfp2.calendar.models import CalendarEvent
+
+
+def parse_utc(value):
+    naive = dateutil.parser.parse(value)
+    return naive.replace(tzinfo=pytz.UTC)
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -15,8 +21,8 @@ class EventsGetView(LoginRequiredMixin, JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
         events = CalendarEvent.objects.filter(
             owner=request.user,
-            start_date__gte=request.GET.get('start'),
-            end_date__lte=request.GET.get('end'),
+            start_date__gte=parse_utc(request.GET.get('start')),
+            end_date__lte=parse_utc(request.GET.get('end')),
         )
         rows = [event.get_as_fullcalendar_event() for event in events]
         return self.render_json_response(rows)
