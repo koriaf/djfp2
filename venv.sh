@@ -1,16 +1,13 @@
 #!/bin/bash
 ROOT=`dirname "${BASH_SOURCE[0]}"`
-act="${ROOT}/system/venv/bin/activate"
-export PYTHONDONTWRITEBYTECODE='dontwrite'
+act="${ROOT}/.venv/bin/activate"
 
 if [ ! -f "${act}" ]; then
     set -e
-    mkdir -p ${ROOT}/system/
-    pyvenv ${ROOT}/system/venv
+    pyvenv ${ROOT}/.venv
     source ${act}
-    wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | python
-    wget https://bootstrap.pypa.io/get-pip.py -O - | python
-    ${ROOT}/upgrade-requirements.sh
+    pip install pip wheel --upgrade
+    pip install -r requirements.txt
     set +e
 else
     source ${act}

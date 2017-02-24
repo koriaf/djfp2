@@ -1,0 +1,12 @@
+{
+  "name": "django-fullcalendar",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Just another home calendar application",
+  "main": "",
+  "dependencies": {
+    "fullcalendar": "~3.2.0",
+    "bootstrap": "~3.3.7",
+    "moment": "~2.0.0"
+  }
+}
