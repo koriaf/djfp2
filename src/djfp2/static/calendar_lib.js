@@ -3,14 +3,12 @@ PlannerLib.calendar = {};
 PlannerLib.calendar.popup = {};
 
 PlannerLib.calendar.eventCreate = function(new_event) {
-    moment().local();
-
     $.post(
         "/calendar/events/create/",
         {
             'title': new_event.title,
-            'start_date': new_event.start.utc().toISOString(),
-            'end_date': new_event.end.utc().toISOString(),
+            'start_date': new_event.start.toISOString(),
+            'end_date': new_event.end.toISOString(),
             'event_to_replace': new_event.id,
             'color': new_event.backgroundColor,
             'textcolor': new_event.textColor,
@@ -31,13 +29,12 @@ PlannerLib.calendar.eventCreate = function(new_event) {
 }
 
 PlannerLib.calendar.eventSave = function(new_event) {
-    moment().local();
     $.post(
         "/calendar/events/update/",
         {
             'event_id': new_event.id,
-            'start_date': new_event.start.utc().toISOString(),
-            'end_date': new_event.end.utc().toISOString(),
+            'start_date': new_event.start.toISOString(),
+            'end_date': new_event.end.toISOString(),
             'title': new_event.title,
             'color': new_event.backgroundColor,
             'textcolor': new_event.textColor,
@@ -217,4 +214,51 @@ function rgb2hex(rgb) {
         return ("0" + parseInt(x).toString(16)).slice(-2);
     }
     return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
+function isAnythingToNotify() {
+    /* periodic function which is called each 1 minute and
+    notifies user if something is going to happen
+    in good way
+    or not
+    */
+    var timeout = 10;
+    var notifyBefore = 10; // minutes
+
+    var currentTime = moment();
+    var maxTime = moment().add(timeout, 'seconds');
+
+    var allEvents = $("#calendar").fullCalendar('clientEvents');
+    for (var eventIndex in allEvents) {
+        var event = allEvents[eventIndex];
+        if (event.is_notify) {
+            var notifyMoment = moment(event.start).subtract(notifyBefore, 'minutes');
+            if ((notifyMoment >= currentTime) && (notifyMoment < maxTime)) {
+                var message = `Event ${event.title} is coming in ${notifyBefore} minutes`;
+                notifyText(message);
+            }
+        }
+    }
+
+    window.setTimeout(isAnythingToNotify, timeout * 1000)
+}
+
+function notifyText(text) {
+    if (!("Notification" in window)) {
+        console.error("This browser does not support desktop notification");
+    }
+
+    else if (Notification.permission === "granted") {
+        var notification = new Notification(text);
+    }
+
+    // Otherwise, we need to ask the user for permission
+    else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function (permission) {
+          // If the user accepts, let's create a notification
+          if (permission === "granted") {
+            var notification = new Notification(text);
+          }
+        });
+    }
 }

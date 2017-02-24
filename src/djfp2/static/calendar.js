@@ -9,8 +9,8 @@ $(document).ready(function() {
         allDaySlot: false,
         axisFormat: 'HH:mm',
         timeFormat: 'HH:mm',
-        minTime: '08:00:00',
-        timezone: 'utc',
+        minTime: '07:00:00',
+        timezone: "local",
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -85,4 +85,10 @@ $(document).ready(function() {
     $("#popup #colors_choicer .color_block").click(PlannerLib.calendar.eventColorChange);
 
     $(window).resize(PlannerLib.calendar.setTimeline);
+
+    isAnythingToNotify();
+
+    if (Notification.permission === 'default') {
+        Notification.requestPermission()
+    }
 });

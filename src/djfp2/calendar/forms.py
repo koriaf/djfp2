@@ -28,6 +28,7 @@ class CalendarEventForm(forms.ModelForm):
                     rasterized_data[field_name] = value
         rasterized_data['start_date'] = dateutil.parser.parse(rasterized_data['start_date'])
         rasterized_data['end_date'] = dateutil.parser.parse(rasterized_data['end_date'])
+        # print("User sent start_date %s which was interpreted as %s" % (data['start_date'], rasterized_data['start_date']))
         return super(CalendarEventForm, self).__init__(rasterized_data, *args, **kwargs)
 
     def save(self, *args, **kwargs):
