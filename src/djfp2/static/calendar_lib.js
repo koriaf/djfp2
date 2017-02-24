@@ -41,6 +41,7 @@ PlannerLib.calendar.eventSave = function(new_event) {
             'title': new_event.title,
             'color': new_event.backgroundColor,
             'textcolor': new_event.textColor,
+            'is_notify': new_event.is_notify
         },
         function(data) {
             if (data.result != "success") {
@@ -50,6 +51,12 @@ PlannerLib.calendar.eventSave = function(new_event) {
     ).fail(function(data) {
         alert(JSON.stringify(data));
     });
+}
+
+PlannerLib.calendar.eventRender = function(event, element, view) {
+    if (event.is_notify) {
+        element.find(".fc-title").css("font-weight", "bold")
+    }
 }
 
 PlannerLib.calendar.eventRemove = function(event_id) {
@@ -79,12 +86,11 @@ PlannerLib.calendar.eventClick = function(calEvent, view) {
     left = Math.max(left, 0);
     $popup.css('top', top);
     $popup.css('left', left);
-
     // fill form fields by initial values
     // using find() here determines right DOM (id_event_id will be always child for popup, and so on)
     $popup.find("#id_event_id").val(calEvent.id);
     $popup.find("#id_event_title").val(calEvent.title);
-    $popup.find("#id_event_title").attr('title', calEvent.title);
+    $popup.find("#id_notify_me").attr('checked', calEvent.is_notify);
     $popup.show();
     $popup.find("#id_event_title").focus();
 }
@@ -114,13 +120,16 @@ PlannerLib.calendar.dayClick = function(date, jsEvent, view) {
 
 PlannerLib.calendar.eventColorChange = function() {
     var $th = $(this);
+    var $popup = $("#popup");
     var bgcolor = $th.css('background-color');
     var textcolor = $th.css('color');
     var event_id = $('#popup #id_event_id').val();
+    var event_notify = $("#popup #id_notify_me")[0].checked;
 
     var current_event = $("#calendar").fullCalendar('clientEvents', event_id)[0];
     current_event.backgroundColor = bgcolor;
     current_event.textColor = textcolor;
+    current_event.is_notify = event_notify;
     $("#calendar").fullCalendar('updateEvent', current_event);
 
     $("#popup").hide();
@@ -132,10 +141,12 @@ PlannerLib.calendar.popup.pressSaveButton = function() {
     var $popup = $("#popup");
     var event_id = parseInt($popup.find("#id_event_id").val());
     var event_title = $popup.find("#id_event_title").val();
+    var event_notify = $popup.find("#id_notify_me")[0].checked;
 
     var calEvent = $("#calendar").fullCalendar('clientEvents', event_id)[0];
 
     calEvent.title = event_title;
+    calEvent.is_notify = event_notify;
     $("#calendar").fullCalendar('updateEvent', calEvent);
 
     PlannerLib.calendar.eventSave(calEvent);

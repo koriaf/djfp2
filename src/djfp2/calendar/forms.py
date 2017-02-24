@@ -10,6 +10,7 @@ class CalendarEventForm(forms.ModelForm):
         fields = (
             'start_date', 'end_date',
             'title', 'color', 'textcolor',
+            'is_notify',
         )
 
     def __init__(self, data, *args, **kwargs):

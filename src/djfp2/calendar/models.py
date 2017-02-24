@@ -9,6 +9,7 @@ class CalendarEvent(models.Model):
     title = models.CharField(max_length=1000)
     color = models.CharField(max_length=40, blank=True, default="#6aa4c1")
     textcolor = models.CharField(max_length=40, blank=True, default="black")
+    is_notify = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('start_date',)
@@ -24,5 +25,6 @@ class CalendarEvent(models.Model):
             'title': self.title,
             'backgroundColor': self.color,
             'textColor': self.textcolor,
+            'is_notify': self.is_notify
         }
         return result

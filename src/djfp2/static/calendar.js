@@ -24,6 +24,7 @@ $(document).ready(function() {
         eventClick: PlannerLib.calendar.eventClick,
         eventResize: PlannerLib.calendar.eventChange,
         eventDrop: PlannerLib.calendar.eventChange,
+        eventRender: PlannerLib.calendar.eventRender,
         dayClick: PlannerLib.calendar.dayClick,
         viewRender: function(view) {
             if(typeof(timelineInterval) != 'undefined'){

@@ -15,7 +15,7 @@
 
 #popup {
     display: none;
-    width: 330px;
+    width: 390px;
     position: absolute;
     z-index: 10;
     background-color: #fefdfe;
@@ -23,7 +23,7 @@
     padding: 10px;
 }
 
-#popup input {
+#popup input[type='text'] {
     width: 290px;
     padding: 0px 2px;
 }
