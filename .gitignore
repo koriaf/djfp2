@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 .venv
 node_modules
+manage.sh
+runserver-dev.sh
 
 # C extensions
 *.so

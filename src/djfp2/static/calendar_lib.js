@@ -43,7 +43,7 @@ PlannerLib.calendar.eventSave = function(new_event) {
         },
         function(data) {
             if (data.result != "success") {
-                alert(JSON.stringify(data));        
+                alert(JSON.stringify(data));
             }
         }
     ).fail(function(data) {
@@ -59,7 +59,7 @@ PlannerLib.calendar.eventRemove = function(event_id) {
         },
         function(data) {
             if (data.result != "success") {
-                alert(JSON.stringify(data));        
+                alert(JSON.stringify(data));
             }
         }
     ).fail(function(data) {
@@ -78,7 +78,7 @@ PlannerLib.calendar.eventClick = function(calEvent, view) {
     left = Math.max(left, 0);
     $popup.css('top', top);
     $popup.css('left', left);
-    
+
     // fill form fields by initial values
     // using find() here determines right DOM (id_event_id will be always child for popup, and so on)
     $popup.find("#id_event_id").val(calEvent.id);
@@ -173,10 +173,13 @@ PlannerLib.calendar.setTimeline = function(view) {
     }
     var calMinTimeInMinutes = strTimeToMinutes(curCalView.opt("minTime"));
     var calMaxTimeInMinutes = strTimeToMinutes(curCalView.opt("maxTime"));
-    var curSeconds = (( ((curTime.getHours() * 60) + curTime.getMinutes()) - calMinTimeInMinutes) * 60) + curTime.getSeconds();
-    var percentOfDay = curSeconds / ((calMaxTimeInMinutes - calMinTimeInMinutes) * 60);
 
-    var topLoc = Math.floor(parentDiv.height() * percentOfDay);
+    var curMinutes = curTime.getHours() * 60 + curTime.getMinutes();
+    var relMinutes = curMinutes - calMinTimeInMinutes;
+    var percentOfDay = relMinutes / (calMaxTimeInMinutes - calMinTimeInMinutes);
+
+    var topLoc = Math.floor($("div.fc-slats").height() * percentOfDay);
+
     var timeCol = $('.fc-time:visible');
     timeline.css({top: topLoc + "px", left: (timeCol.outerWidth(true))+"px"});
 

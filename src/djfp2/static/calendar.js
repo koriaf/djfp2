@@ -4,11 +4,12 @@ $(document).ready(function() {
     $('#calendar').fullCalendar({
         // http://fullcalendar.io/docs/
         defaultView: 'agendaWeek',
+        contentHeight: "parent",
         editable: true,
         allDaySlot: false,
         axisFormat: 'HH:mm',
         timeFormat: 'HH:mm',
-        minTime: '07:00:00',
+        minTime: '08:00:00',
         timezone: 'local',
         header: {
             left: 'prev,next today',
@@ -24,14 +25,14 @@ $(document).ready(function() {
         eventResize: PlannerLib.calendar.eventChange,
         eventDrop: PlannerLib.calendar.eventChange,
         dayClick: PlannerLib.calendar.dayClick,
-        viewRender: function(view) {              
+        viewRender: function(view) {
             if(typeof(timelineInterval) != 'undefined'){
-              window.clearInterval(timelineInterval); 
+              window.clearInterval(timelineInterval);
             }
             timelineInterval = window.setInterval(PlannerLib.calendar.setTimeline, 30000);
             try {
               PlannerLib.calendar.setTimeline();
-            } catch(err) {}
+            } catch(err) {console.error(err)}
         },
     });
 
@@ -39,7 +40,7 @@ $(document).ready(function() {
     PlannerLib.calendar.setTimeline();
 
     // add csrf token to every ajax request
-    $.ajaxSetup({ 
+    $.ajaxSetup({
         beforeSend: function(xhr, settings) {
          function getCookie(name) {
              var cookieValue = null;
@@ -60,7 +61,7 @@ $(document).ready(function() {
              // Only send the token to relative URLs i.e. locally.
              xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
          }
-        } 
+        }
     });
 
     // hide popup on ESC key press or close button
